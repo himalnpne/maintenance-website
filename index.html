@@ -13,11 +13,11 @@
   
   <style>
     :root {
-      --primary: #014b92;
-      --secondary: #014b92;
-      --accent: #c8002a;
-      --dark: #1e293b;
-      --light: #f8fafc;
+      --primary: #014b92; /* Dark blue */
+      --secondary: #c8002a; /* Red */
+      --accent: #c8002a; /* Red */
+      --dark: #1e293b; /* Dark background */
+      --light: #f8fafc; /* Light background */
       --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
       --box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
     }
@@ -42,8 +42,11 @@
     }
 
     body.dark-mode {
-      --light: #1e293b;
-      --dark: #f8fafc;
+      --light: #1e293b; /* Dark background */
+      --dark: #f8fafc; /* Light text */
+      --primary: #4a90e2; /* Light blue for dark mode */
+      --secondary: #ff6b6b; /* Light red for dark mode */
+      --accent: #ff6b6b; /* Light red for dark mode */
       background-color: var(--light);
       color: var(--dark);
     }
@@ -89,7 +92,7 @@
       height: 400px;
       bottom: -200px;
       right: -200px;
-      background: var(--accent);
+      background: var(--secondary);
     }
 
     .shape-3 {
@@ -111,7 +114,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      min-height: 100vh;
+      min-height: 100vh; /* Fit to screen height */
     }
     
     .maintenance-card {
@@ -154,7 +157,7 @@
     }
 
     body.dark-mode .logo-container {
-      background: var(--dark);
+      background: var(--light);
     }
     
     .logo {
@@ -209,7 +212,7 @@
     }
 
     body.dark-mode .title {
-      color: #ff6b6b; /* Different color in dark mode */
+      color: var(--dark); /* White text in dark mode */
     }
     
     .title-highlight {
@@ -217,20 +220,20 @@
     }
 
     body.dark-mode .title-highlight {
-      color: #ffcc00; /* Different color in dark mode */
+      color: var(--secondary); /* Light red for dark mode */
     }
     
     .divider {
       width: 120px;
       height: 4px;
-      background: linear-gradient(90deg, var(--primary), var(--accent));
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
       border-radius: 2px;
       margin: 20px auto;
       position: relative;
     }
 
     body.dark-mode .divider {
-      background: linear-gradient(90deg, #ff6b6b, #ffcc00); /* Different gradient in dark mode */
+      background: linear-gradient(90deg, var(--primary), var(--secondary)); /* Light gradient in dark mode */
     }
     
     .divider::before {
@@ -238,7 +241,7 @@
       position: absolute;
       width: 20px;
       height: 20px;
-      background: var(--accent);
+      background: var(--secondary);
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%) rotate(45deg);
@@ -247,7 +250,7 @@
     }
 
     body.dark-mode .divider::before {
-      background: #ffcc00; /* Different color in dark mode */
+      background: var(--secondary); /* Light red for dark mode */
     }
     
     @keyframes rotate {
@@ -265,7 +268,7 @@
     }
 
     body.dark-mode .message {
-      color: #a8d8ea; /* Different color in dark mode */
+      color: var(--dark); /* White text in dark mode */
     }
     
     .progress-section {
@@ -285,44 +288,14 @@
     
     .progress-bar {
       height: 100%;
-      background: linear-gradient(90deg, var(--primary), var(--accent));
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
       border-radius: 10px;
-      width: 0;
-      position: relative;
-      animation: progress 3s ease-out forwards;
+      width: 0; /* Initial width */
+      transition: width 0.3s ease; /* Smooth transition */
     }
 
     body.dark-mode .progress-bar {
-      background: linear-gradient(90deg, #ff6b6b, #ffcc00); /* Different gradient in dark mode */
-    }
-    
-    @keyframes progress {
-      0% {
-        width: 0%;
-      }
-      100% {
-        width: 35%;
-      }
-    }
-    
-    .progress-bar::after {
-      content: '';
-      position: absolute;
-      right: 0;
-      top: 0;
-      height: 100%;
-      width: 20px;
-      background: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.8));
-      animation: shine 2s infinite;
-    }
-    
-    @keyframes shine {
-      0% {
-        transform: translateX(-100%);
-      }
-      100% {
-        transform: translateX(200%);
-      }
+      background: linear-gradient(90deg, var(--primary), var(--secondary)); /* Light gradient in dark mode */
     }
     
     .progress-text {
@@ -333,7 +306,7 @@
     }
 
     body.dark-mode .progress-text {
-      color: #a8d8ea; /* Different color in dark mode */
+      color: var(--dark); /* White text in dark mode */
     }
     
     .current-time-label {
@@ -344,7 +317,7 @@
     }
 
     body.dark-mode .current-time-label {
-      color: #ff6b6b; /* Different color in dark mode */
+      color: var(--dark); /* White text in dark mode */
     }
     
     .countdown {
@@ -376,15 +349,15 @@
     }
 
     body.dark-mode .countdown-value {
-      background: #ff6b6b; /* Different color in dark mode */
+      background: var(--secondary); /* Light red for dark mode */
     }
 
     .countdown-item:nth-child(2n) .countdown-value {
-      background: var(--accent);
+      background: var(--secondary);
     }
 
     body.dark-mode .countdown-item:nth-child(2n) .countdown-value {
-      background: #ffcc00; /* Different color in dark mode */
+      background: var(--primary); /* Light blue for dark mode */
     }
     
     .countdown-label {
@@ -397,7 +370,7 @@
     }
 
     body.dark-mode .countdown-label {
-      color: #a8d8ea; /* Different color in dark mode */
+      color: var(--dark); /* White text in dark mode */
     }
     
     .date {
@@ -408,7 +381,7 @@
     }
 
     body.dark-mode .date {
-      color: #ff6b6b; /* Different color in dark mode */
+      color: var(--dark); /* White text in dark mode */
     }
     
     .contact-section {
@@ -423,7 +396,7 @@
     }
 
     body.dark-mode .contact-text {
-      color: #a8d8ea; /* Different color in dark mode */
+      color: var(--dark); /* White text in dark mode */
     }
     
     .social-links {
@@ -449,15 +422,15 @@
     }
 
     body.dark-mode .social-link {
-      background: #ff6b6b; /* Different color in dark mode */
+      background: var(--secondary); /* Light red for dark mode */
     }
 
     .social-link:nth-child(2n) {
-      background: var(--accent);
+      background: var(--secondary);
     }
 
     body.dark-mode .social-link:nth-child(2n) {
-      background: #ffcc00; /* Different color in dark mode */
+      background: var(--primary); /* Light blue for dark mode */
     }
     
     .social-link::before {
@@ -524,13 +497,13 @@
     .pulse-dot {
       width: 12px;
       height: 12px;
-      background-color: var(--accent);
+      background-color: var(--secondary);
       border-radius: 50%;
       animation: pulse-dot 2s infinite;
     }
 
     body.dark-mode .pulse-dot {
-      background: #ffcc00; /* Different color in dark mode */
+      background: var(--primary); /* Light blue for dark mode */
     }
     
     @keyframes pulse-dot {
@@ -551,7 +524,7 @@
     }
 
     body.dark-mode .footer-text {
-      color: #a8d8ea; /* Different color in dark mode */
+      color: var(--dark); /* White text in dark mode */
     }
     
     /* Dark Mode Toggle Button */
@@ -574,11 +547,11 @@
     }
 
     .dark-mode-toggle:hover {
-      background: var(--accent);
+      background: var(--secondary);
     }
 
     body.dark-mode .dark-mode-toggle {
-      background: var(--accent);
+      background: var(--secondary);
     }
 
     body.dark-mode .dark-mode-toggle:hover {
@@ -649,7 +622,7 @@
     }
   </style>
 </head>
-<body>
+<body class="dark-mode"> <!-- Add dark-mode class to body by default -->
   <div class="shape shape-1"></div>
   <div class="shape shape-2"></div>
   <div class="shape shape-3"></div>
@@ -658,11 +631,11 @@
     <div class="maintenance-card">
       <!-- Dark Mode Toggle Button -->
       <button class="dark-mode-toggle" aria-label="Toggle Dark Mode">
-        <i class="fas fa-moon"></i>
+        <i class="fas fa-sun"></i> <!-- Default to sun icon for dark mode -->
       </button>
       
       <div class="logo-container">
-        <img src="logo.svg" alt="Logo" class="logo" onerror="this.onerror=null; this.src='logo.png';">
+        <img src="logo.png" alt="Logo" class="logo" onerror="this.onerror=null; this.src='logo.png';">
         <div class="logo-glow"></div>
       </div>
       
