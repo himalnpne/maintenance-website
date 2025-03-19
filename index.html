@@ -2,16 +2,52 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Under Maintenance | Coming Soon</title>
   
+  <!-- Preload Josefin Sans Font -->
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap"></noscript>
+
   <!-- Font Awesome for icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  
   <style>
+    /* Loading overlay styles */
+    .loading-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #1e293b;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      transition: opacity 0.5s ease-in-out;
+    }
+    
+    .loading-spinner {
+      width: 50px;
+      height: 50px;
+      border: 5px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top-color: #c8002a;
+      animation: spin 1s ease-in-out infinite;
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    
+    /* Hide the main content until fully loaded */
+    .main-content {
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+    }
+    
+    /* Original styles */
     :root {
       --primary: #014b92; /* Dark blue */
       --secondary: #c8002a; /* Red */
@@ -19,7 +55,9 @@
       --dark: #1e293b; /* Dark background */
       --light: #f8fafc; /* Light background */
       --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
-      --box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
+      --glass: rgba(255, 255, 255, 0.1); /* Glassmorphism effect */
+      --shadow: 0 8px 32px rgba(0, 0, 0, 0.1); /* Soft shadow */
+      --blur: blur(10px); /* Blur effect for glassmorphism */
     }
     
     * {
@@ -47,36 +85,44 @@
       --primary: #4a90e2; /* Light blue for dark mode */
       --secondary: #ff6b6b; /* Light red for dark mode */
       --accent: #ff6b6b; /* Light red for dark mode */
+      --glass: rgba(30, 41, 59, 0.1); /* Dark glassmorphism */
       background-color: var(--light);
       color: var(--dark);
     }
 
-    /* Tiling effect */
+    /* Rest of your CSS styles... */
+    /* Background gradient animation */
     body::before {
       content: '';
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: repeating-linear-gradient(
-        45deg,
-        rgba(255, 255, 255, 0.05),
-        rgba(255, 255, 255, 0.05) 10px,
-        rgba(0, 0, 0, 0.05) 10px,
-        rgba(0, 0, 0, 0.05) 20px
-      );
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, var(--primary), var(--secondary));
+      animation: rotate-gradient 20s linear infinite;
       z-index: -2;
-      pointer-events: none;
+      opacity: 0.1;
     }
-    
-    /* Background shapes */
+
+    @keyframes rotate-gradient {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* Glassmorphism effect for shapes */
     .shape {
       position: absolute;
       border-radius: 50%;
       filter: blur(70px);
       z-index: -1;
       opacity: 0.7;
+      background: var(--glass);
+      backdrop-filter: var(--blur);
     }
     
     .shape-1 {
@@ -114,50 +160,46 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      min-height: 100vh; /* Fit to screen height */
+      min-height: 100vh;
     }
     
+    /* Maintenance Card */
     .maintenance-card {
-      background-color: rgba(255, 255, 255, 0.9);
-      backdrop-filter: blur(10px);
+      background: var(--glass);
+      backdrop-filter: var(--blur);
       border-radius: 24px;
-      box-shadow: var(--box-shadow);
+      box-shadow: var(--shadow);
       overflow: hidden;
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
       padding: 40px;
-      transform: translateY(50px);
-      opacity: 0;
-      animation: slideUp 0.8s forwards;
       max-width: 90%;
       margin: 20px;
-      position: relative; /* Added for dark mode toggle positioning */
+      position: relative;
+      border: 1px solid rgba(255, 255, 255, 0.2); /* Glassmorphism border */
     }
 
     body.dark-mode .maintenance-card {
-      background-color: rgba(30, 41, 59, 0.9);
+      background: rgba(30, 41, 59, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.1);
     }
     
-    @keyframes slideUp {
-      to {
-        transform: translateY(0);
-        opacity: 1;
-      }
-    }
-    
+    /* Logo Container */
     .logo-container {
       margin-bottom: 30px;
       position: relative;
-      background: white;
-      border: 10px solid var(--primary);
+      background: var(--glass);
+      backdrop-filter: var(--blur);
+      border: 2px solid rgba(255, 255, 255, 0.2);
       border-radius: 12px;
       padding: 10px;
+      box-shadow: var(--shadow);
     }
 
     body.dark-mode .logo-container {
-      background: var(--light);
+      background: #eeeedd; /* Light background for dark mode */
     }
     
     .logo {
@@ -202,6 +244,7 @@
       }
     }
     
+    /* Title */
     .title {
       color: var(--dark);
       font-size: 2.5rem;
@@ -212,7 +255,7 @@
     }
 
     body.dark-mode .title {
-      color: var(--dark); /* White text in dark mode */
+      color: var(--dark);
     }
     
     .title-highlight {
@@ -220,9 +263,10 @@
     }
 
     body.dark-mode .title-highlight {
-      color: var(--secondary); /* Light red for dark mode */
+      color: var(--secondary);
     }
     
+    /* Divider */
     .divider {
       width: 120px;
       height: 4px;
@@ -233,7 +277,7 @@
     }
 
     body.dark-mode .divider {
-      background: linear-gradient(90deg, var(--primary), var(--secondary)); /* Light gradient in dark mode */
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
     }
     
     .divider::before {
@@ -250,7 +294,7 @@
     }
 
     body.dark-mode .divider::before {
-      background: var(--secondary); /* Light red for dark mode */
+      background: var(--secondary);
     }
     
     @keyframes rotate {
@@ -259,6 +303,7 @@
       }
     }
     
+    /* Message */
     .message {
       color: var(--dark);
       font-size: 1.1rem;
@@ -268,9 +313,10 @@
     }
 
     body.dark-mode .message {
-      color: var(--dark); /* White text in dark mode */
+      color: var(--dark);
     }
     
+    /* Progress Section */
     .progress-section {
       width: 100%;
       max-width: 500px;
@@ -290,12 +336,12 @@
       height: 100%;
       background: linear-gradient(90deg, var(--primary), var(--secondary));
       border-radius: 10px;
-      width: 0; /* Initial width */
-      transition: width 0.3s ease; /* Smooth transition */
+      width: 0;
+      transition: width 0.3s ease;
     }
 
     body.dark-mode .progress-bar {
-      background: linear-gradient(90deg, var(--primary), var(--secondary)); /* Light gradient in dark mode */
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
     }
     
     .progress-text {
@@ -306,9 +352,10 @@
     }
 
     body.dark-mode .progress-text {
-      color: var(--dark); /* White text in dark mode */
+      color: var(--dark);
     }
     
+    /* Current Time Label */
     .current-time-label {
       font-size: 1.2rem;
       color: var(--dark);
@@ -317,9 +364,10 @@
     }
 
     body.dark-mode .current-time-label {
-      color: var(--dark); /* White text in dark mode */
+      color: var(--dark);
     }
     
+    /* Countdown Section */
     .countdown {
       display: flex;
       justify-content: center;
@@ -346,10 +394,11 @@
       justify-content: center;
       align-items: center;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
     }
 
     body.dark-mode .countdown-value {
-      background: var(--secondary); /* Light red for dark mode */
+      background: var(--secondary);
     }
 
     .countdown-item:nth-child(2n) .countdown-value {
@@ -357,7 +406,11 @@
     }
 
     body.dark-mode .countdown-item:nth-child(2n) .countdown-value {
-      background: var(--primary); /* Light blue for dark mode */
+      background: var(--primary);
+    }
+    
+    .countdown-value:hover {
+      transform: scale(1.1);
     }
     
     .countdown-label {
@@ -370,9 +423,10 @@
     }
 
     body.dark-mode .countdown-label {
-      color: var(--dark); /* White text in dark mode */
+      color: var(--dark);
     }
     
+    /* Date Section */
     .date {
       font-size: 1.2rem;
       color: var(--dark);
@@ -381,9 +435,10 @@
     }
 
     body.dark-mode .date {
-      color: var(--dark); /* White text in dark mode */
+      color: var(--dark);
     }
     
+    /* Contact Section */
     .contact-section {
       margin-top: 20px;
     }
@@ -396,7 +451,7 @@
     }
 
     body.dark-mode .contact-text {
-      color: var(--dark); /* White text in dark mode */
+      color: var(--dark);
     }
     
     .social-links {
@@ -419,10 +474,11 @@
       transition: all 0.3s ease;
       position: relative;
       overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
 
     body.dark-mode .social-link {
-      background: var(--secondary); /* Light red for dark mode */
+      background: var(--secondary);
     }
 
     .social-link:nth-child(2n) {
@@ -430,7 +486,7 @@
     }
 
     body.dark-mode .social-link:nth-child(2n) {
-      background: var(--primary); /* Light blue for dark mode */
+      background: var(--primary);
     }
     
     .social-link::before {
@@ -487,6 +543,7 @@
       color: var(--dark);
     }
     
+    /* Footer */
     .footer {
       margin-top: 40px;
       display: flex;
@@ -503,7 +560,7 @@
     }
 
     body.dark-mode .pulse-dot {
-      background: var(--primary); /* Light blue for dark mode */
+      background: var(--primary);
     }
     
     @keyframes pulse-dot {
@@ -524,14 +581,14 @@
     }
 
     body.dark-mode .footer-text {
-      color: var(--dark); /* White text in dark mode */
+      color: var(--dark);
     }
     
     /* Dark Mode Toggle Button */
     .dark-mode-toggle {
       position: absolute;
       top: 20px;
-      right: 20px; /* Positioned in the top-right corner */
+      right: 20px;
       background: var(--primary);
       border: none;
       border-radius: 50%;
@@ -542,7 +599,7 @@
       align-items: center;
       color: white;
       cursor: pointer;
-      box-shadow: var(--box-shadow);
+      box-shadow: var(--shadow);
       transition: background 0.3s ease;
     }
 
@@ -558,139 +615,248 @@
       background: var(--primary);
     }
     
-    /* Responsiveness */
-    @media (max-width: 768px) {
-      .maintenance-card {
-        padding: 30px 20px;
+    /* Floating Music Notes */
+    .music-note {
+      position: absolute;
+      font-size: 1.5rem;
+      color: var(--primary);
+      animation: float-note 6s infinite ease-in-out;
+      opacity: 0.7;
+    }
+
+    body.dark-mode .music-note {
+      color: var(--secondary);
+    }
+
+    @keyframes float-note {
+      0%, 100% {
+        transform: translateY(0) rotate(0deg);
       }
-      
-      .logo {
-        width: 140px;
-      }
-      
-      .title {
-        font-size: 2rem;
-      }
-      
-      .message {
-        font-size: 1rem;
-      }
-      
-      .countdown {
-        gap: 15px;
-      }
-      
-      .countdown-value {
-        width: 60px;
-        height: 60px;
-        font-size: 1.7rem;
+      50% {
+        transform: translateY(-20px) rotate(360deg);
       }
     }
-    
-    @media (max-width: 480px) {
-      .maintenance-card {
-        padding: 25px 15px;
+
+    /* Floating Cars */
+    .car {
+      position: absolute;
+      width: 40px;
+      height: auto;
+      animation: float-car 10s infinite ease-in-out;
+      opacity: 0.8;
+    }
+
+    .car-1 {
+      animation-duration: 12s;
+      top: 5%; /* Adjusted position */
+      left: 10%; /* Adjusted position */
+    }
+
+    .car-2 {
+      animation-duration: 14s;
+      top: 15%; /* Adjusted position */
+      left: 85%; /* Adjusted position */
+    }
+
+    .car-3 {
+      animation-duration: 16s;
+      top: 60%; /* Adjusted position */
+      left: 5%; /* Adjusted position */
+    }
+
+    .car-4 {
+      animation-duration: 18s;
+      top: 80%; /* Adjusted position */
+      left: 90%; /* Adjusted position */
+    }
+
+    @keyframes float-car {
+      0%, 100% {
+        transform: translateY(0) rotate(0deg);
       }
-      
-      .logo {
-        width: 120px;
+      25% {
+        transform: translateY(-20px) rotate(10deg);
       }
-      
-      .title {
-        font-size: 1.7rem;
+      50% {
+        transform: translateY(0) rotate(0deg);
       }
-      
-      .message {
-        font-size: 0.9rem;
+      75% {
+        transform: translateY(-20px) rotate(-10deg);
       }
-      
-      .countdown {
-        gap: 10px;
+    }
+
+    /* Responsiveness */
+    @media (max-width: 768px) {
+      .car {
+        width: 30px; /* Smaller cars on smaller screens */
       }
-      
-      .countdown-value {
-        width: 50px;
-        height: 50px;
-        font-size: 1.5rem;
+
+      .car-1 {
+        top: 5%;
+        left: 5%;
       }
-      
-      .social-link {
-        width: 45px;
-        height: 45px;
-        font-size: 1.1rem;
+
+      .car-2 {
+        top: 15%;
+        left: 80%;
+      }
+
+      .car-3 {
+        top: 60%;
+        left: 5%;
+      }
+
+      .car-4 {
+        top: 80%;
+        left: 85%;
       }
     }
   </style>
 </head>
-<body class="dark-mode"> <!-- Add dark-mode class to body by default -->
-  <div class="shape shape-1"></div>
-  <div class="shape shape-2"></div>
-  <div class="shape shape-3"></div>
-  
-  <div class="container">
-    <div class="maintenance-card">
-      <!-- Dark Mode Toggle Button -->
-      <button class="dark-mode-toggle" aria-label="Toggle Dark Mode">
-        <i class="fas fa-sun"></i> <!-- Default to sun icon for dark mode -->
-      </button>
-      
-      <div class="logo-container">
-        <img src="logo.png" alt="Logo" class="logo" onerror="this.onerror=null; this.src='logo.png';">
-        <div class="logo-glow"></div>
-      </div>
-      
-      <h1 class="title">We're <span class="title-highlight">Under Maintenance</span></h1>
-      
-      <div class="divider"></div>
-      
-      <p class="message">We're currently updating our website to serve you better. We'll be back online shortly with new features and improvements.</p>
-      
-      <div class="progress-section">
-        <div class="progress-container">
-          <div class="progress-bar"></div>
+<body>
+  <!-- Loading overlay -->
+  <div class="loading-overlay" id="loading-overlay">
+    <div class="loading-spinner"></div>
+  </div>
+
+  <!-- Main content wrapped in a container -->
+  <div class="main-content" id="main-content">
+    <!-- Floating Music Notes -->
+    <div class="music-note" style="top: 10%; left: 20%;">♪</div>
+    <div class="music-note" style="top: 25%; left: 75%;">♫</div>
+    <div class="music-note" style="top: 55%; left: 25%;">♪</div>
+    <div class="music-note" style="top: 85%; left: 70%;">♫</div>
+
+    <!-- Floating Cars -->
+    <div class="car car-1">
+      <img src="car1.svg" alt="Car 1">
+    </div>
+    <div class="car car-2">
+      <img src="car2.svg" alt="Car 2">
+    </div>
+    <div class="car car-3">
+      <img src="car3.svg" alt="Car 3">
+    </div>
+    <div class="car car-4">
+      <img src="car4.svg" alt="Car 4">
+    </div>
+
+    <div class="shape shape-1"></div>
+    <div class="shape shape-2"></div>
+    <div class="shape shape-3"></div>
+    
+    <div class="container">
+      <div class="maintenance-card">
+        <!-- Dark Mode Toggle Button -->
+        <button class="dark-mode-toggle" aria-label="Toggle Dark Mode">
+          <i class="fas fa-sun"></i>
+        </button>
+        
+        <div class="logo-container">
+          <img src="logo.png" alt="Logo" class="logo" onerror="this.onerror=null; this.src='logo.png';">
+          <div class="logo-glow"></div>
         </div>
-        <p class="progress-text">5% Completed</p>
-      </div>
-      
-      <!-- Current Time Label -->
-      <div class="current-time-label">Current Time</div>
-      
-      <!-- Countdown Section (Now Displays Current Time) -->
-      <div class="countdown">
-        <div class="countdown-item">
-          <div class="countdown-value" id="hours">00</div>
-          <div class="countdown-label">Hours</div>
+        
+        <h1 class="title">We're <span class="title-highlight">Under Maintenance</span></h1>
+        
+        <div class="divider"></div>
+        
+        <p class="message">We're currently updating our website to serve you better. We'll be back online shortly with new features and improvements.</p>
+        
+        <div class="progress-section">
+          <div class="progress-container">
+            <div class="progress-bar"></div>
+          </div>
+          <p class="progress-text">5% Completed</p>
         </div>
-        <div class="countdown-item">
-          <div class="countdown-value" id="minutes">00</div>
-          <div class="countdown-label">Minutes</div>
+        
+        <!-- Current Time Label -->
+        <div class="current-time-label">Current Time</div>
+        
+        <!-- Countdown Section (Now Displays Current Time) -->
+        <div class="countdown">
+          <div class="countdown-item">
+            <div class="countdown-value" id="hours">00</div>
+            <div class="countdown-label">Hours</div>
+          </div>
+          <div class="countdown-item">
+            <div class="countdown-value" id="minutes">00</div>
+            <div class="countdown-label">Minutes</div>
+          </div>
+          <div class="countdown-item">
+            <div class="countdown-value" id="seconds">00</div>
+            <div class="countdown-label">Seconds</div>
+          </div>
         </div>
-        <div class="countdown-item">
-          <div class="countdown-value" id="seconds">00</div>
-          <div class="countdown-label">Seconds</div>
+        
+        <!-- Date Section -->
+        <div class="date" id="current-date">Loading date...</div>
+        
+        <div class="contact-section">
+          <p class="contact-text">Stay connected with us</p>
+          <div class="social-links">
+            <a href="https://instagram.com/himalnpne" class="social-link" aria-label="himalnpne">
+              <i class="fab fa-instagram"></i>
+            </a>
+          </div>
         </div>
-      </div>
-      
-      <!-- Date Section -->
-      <div class="date" id="current-date">Loading date...</div>
-      
-      <div class="contact-section">
-        <p class="contact-text">Stay connected with us</p>
-        <div class="social-links">
-          <a href="https://instagram.com/himalnpne" class="social-link" aria-label="himalnpne">
-            <i class="fab fa-instagram"></i>
-          </a>
+        
+        <div class="footer">
+          <div class="pulse-dot"></div>
+          <p class="footer-text">Our team is working hard to improve your experience</p>
         </div>
-      </div>
-      
-      <div class="footer">
-        <div class="pulse-dot"></div>
-        <p class="footer-text">Our team is working hard to improve your experience</p>
       </div>
     </div>
   </div>
 
   <script>
+    // Detect user's preferred color scheme
+    function detectColorScheme() {
+      const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+      const body = document.body;
+      const darkModeToggle = document.querySelector('.dark-mode-toggle');
+      
+      // Set initial mode based on system preference
+      if (darkModeMediaQuery.matches) {
+        body.classList.add('dark-mode');
+        darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+      } else {
+        body.classList.remove('dark-mode');
+        darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+      }
+      
+      // Listen for changes in system preference
+      darkModeMediaQuery.addEventListener('change', (e) => {
+        if (e.matches) {
+          body.classList.add('dark-mode');
+          darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        } else {
+          body.classList.remove('dark-mode');
+          darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+        }
+      });
+    }
+
+    // Wait for the entire page to load
+    window.addEventListener('load', function() {
+      const loadingOverlay = document.getElementById('loading-overlay');
+      const mainContent = document.getElementById('main-content');
+      
+      // Hide loading overlay and show main content
+      setTimeout(function() {
+        loadingOverlay.style.opacity = '0';
+        mainContent.style.opacity = '1';
+        
+        // Remove loading overlay after transition
+        setTimeout(function() {
+          loadingOverlay.style.display = 'none';
+        }, 500);
+      }, 1000);
+      
+      // Detect color scheme
+      detectColorScheme();
+    });
+
     // Update current time and date
     function updateDateTime() {
       const now = new Date();
