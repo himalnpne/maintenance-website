@@ -13,40 +13,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <style>
-    /* Loading overlay styles */
-    .loading-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: #1e293b;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 9999;
-      transition: opacity 0.5s ease-in-out;
-    }
-    
-    .loading-spinner {
-      width: 50px;
-      height: 50px;
-      border: 5px solid rgba(255, 255, 255, 0.3);
-      border-radius: 50%;
-      border-top-color: #c8002a;
-      animation: spin 1s ease-in-out infinite;
-    }
-    
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-    
-    /* Hide the main content until fully loaded */
-    .main-content {
-      opacity: 0;
-      transition: opacity 0.5s ease-in-out;
-    }
-    
     /* Original styles */
     :root {
       --primary: #014b92; /* Dark blue */
@@ -90,7 +56,6 @@
       color: var(--dark);
     }
 
-    /* Rest of your CSS styles... */
     /* Background gradient animation */
     body::before {
       content: '';
@@ -174,7 +139,7 @@
       flex-direction: column;
       align-items: center;
       text-align: center;
-      padding: 40px;
+      padding: 20px;
       max-width: 90%;
       margin: 20px;
       position: relative;
@@ -188,7 +153,7 @@
     
     /* Logo Container */
     .logo-container {
-      margin-bottom: 30px;
+      margin-bottom: 20px;
       position: relative;
       background: var(--glass);
       backdrop-filter: var(--blur);
@@ -203,7 +168,7 @@
     }
     
     .logo {
-      width: 160px;
+      width: 120px;
       height: auto;
       filter: drop-shadow(0px 5px 15px rgba(0, 0, 0, 0.15));
       animation: float 6s ease-in-out infinite;
@@ -220,8 +185,8 @@
     
     .logo-glow {
       position: absolute;
-      width: 180px;
-      height: 60px;
+      width: 140px;
+      height: 50px;
       background: var(--primary);
       bottom: -20px;
       left: 50%;
@@ -247,9 +212,9 @@
     /* Title */
     .title {
       color: var(--dark);
-      font-size: 2.5rem;
+      font-size: 1.8rem;
       font-weight: 700;
-      margin-bottom: 15px;
+      margin-bottom: 10px;
       position: relative;
       display: inline-block;
     }
@@ -268,11 +233,11 @@
     
     /* Divider */
     .divider {
-      width: 120px;
+      width: 80px;
       height: 4px;
       background: linear-gradient(90deg, var(--primary), var(--secondary));
       border-radius: 2px;
-      margin: 20px auto;
+      margin: 15px auto;
       position: relative;
     }
 
@@ -283,8 +248,8 @@
     .divider::before {
       content: '';
       position: absolute;
-      width: 20px;
-      height: 20px;
+      width: 15px;
+      height: 15px;
       background: var(--secondary);
       top: 50%;
       left: 50%;
@@ -306,10 +271,10 @@
     /* Message */
     .message {
       color: var(--dark);
-      font-size: 1.1rem;
-      line-height: 1.7;
-      margin-bottom: 30px;
-      max-width: 600px;
+      font-size: 1rem;
+      line-height: 1.5;
+      margin-bottom: 20px;
+      max-width: 90%;
     }
 
     body.dark-mode .message {
@@ -319,17 +284,17 @@
     /* Progress Section */
     .progress-section {
       width: 100%;
-      max-width: 500px;
-      margin-bottom: 40px;
+      max-width: 400px;
+      margin-bottom: 30px;
     }
     
     .progress-container {
       width: 100%;
-      height: 10px;
+      height: 8px;
       background-color: rgba(0, 0, 0, 0.1);
       border-radius: 10px;
       overflow: hidden;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
     
     .progress-bar {
@@ -346,7 +311,7 @@
     
     .progress-text {
       color: var(--dark);
-      font-size: 0.9rem;
+      font-size: 0.8rem;
       text-align: right;
       opacity: 0.7;
     }
@@ -357,7 +322,7 @@
     
     /* Current Time Label */
     .current-time-label {
-      font-size: 1.2rem;
+      font-size: 1rem;
       color: var(--dark);
       margin-bottom: 10px;
       font-weight: 600;
@@ -371,7 +336,7 @@
     .countdown {
       display: flex;
       justify-content: center;
-      gap: 20px;
+      gap: 10px;
       margin-top: 10px;
       margin-bottom: 20px;
     }
@@ -383,11 +348,11 @@
     }
     
     .countdown-value {
-      font-size: 2rem;
+      font-size: 1.5rem;
       font-weight: 700;
       color: white;
-      width: 70px;
-      height: 70px;
+      width: 50px;
+      height: 50px;
       background: var(--primary);
       border-radius: 12px;
       display: flex;
@@ -414,9 +379,9 @@
     }
     
     .countdown-label {
-      font-size: 0.8rem;
+      font-size: 0.7rem;
       color: var(--dark);
-      margin-top: 8px;
+      margin-top: 5px;
       text-transform: uppercase;
       letter-spacing: 1px;
       opacity: 0.7;
@@ -428,7 +393,7 @@
     
     /* Date Section */
     .date {
-      font-size: 1.2rem;
+      font-size: 1rem;
       color: var(--dark);
       margin-top: 10px;
       opacity: 0.8;
@@ -445,8 +410,8 @@
     
     .contact-text {
       color: var(--dark);
-      font-size: 1rem;
-      margin-bottom: 15px;
+      font-size: 0.9rem;
+      margin-bottom: 10px;
       opacity: 0.8;
     }
 
@@ -457,19 +422,19 @@
     .social-links {
       display: flex;
       justify-content: center;
-      gap: 15px;
+      gap: 10px;
     }
     
     .social-link {
-      width: 50px;
-      height: 50px;
+      width: 40px;
+      height: 40px;
       background: var(--primary);
       border-radius: 50%;
       display: flex;
       justify-content: center;
       align-items: center;
       color: white;
-      font-size: 1.2rem;
+      font-size: 1rem;
       text-decoration: none;
       transition: all 0.3s ease;
       position: relative;
@@ -528,7 +493,7 @@
       color: var(--light);
       padding: 5px 10px;
       border-radius: 5px;
-      font-size: 0.8rem;
+      font-size: 0.7rem;
       opacity: 0;
       transition: opacity 0.3s ease;
       pointer-events: none;
@@ -545,15 +510,15 @@
     
     /* Footer */
     .footer {
-      margin-top: 40px;
+      margin-top: 20px;
       display: flex;
       align-items: center;
       gap: 10px;
     }
     
     .pulse-dot {
-      width: 12px;
-      height: 12px;
+      width: 10px;
+      height: 10px;
       background-color: var(--secondary);
       border-radius: 50%;
       animation: pulse-dot 2s infinite;
@@ -576,7 +541,7 @@
     
     .footer-text {
       color: var(--dark);
-      font-size: 0.9rem;
+      font-size: 0.8rem;
       opacity: 0.7;
     }
 
@@ -587,13 +552,13 @@
     /* Dark Mode Toggle Button */
     .dark-mode-toggle {
       position: absolute;
-      top: 20px;
-      right: 20px;
+      top: 10px;
+      right: 10px;
       background: var(--primary);
       border: none;
       border-radius: 50%;
-      width: 40px;
-      height: 40px;
+      width: 35px;
+      height: 35px;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -618,7 +583,7 @@
     /* Floating Music Notes */
     .music-note {
       position: absolute;
-      font-size: 1.5rem;
+      font-size: 1.2rem;
       color: var(--primary);
       animation: float-note 6s infinite ease-in-out;
       opacity: 0.7;
@@ -640,7 +605,7 @@
     /* Floating Cars */
     .car {
       position: absolute;
-      width: 40px;
+      width: 30px;
       height: auto;
       animation: float-car 10s infinite ease-in-out;
       opacity: 0.8;
@@ -648,26 +613,26 @@
 
     .car-1 {
       animation-duration: 12s;
-      top: 5%; /* Adjusted position */
-      left: 10%; /* Adjusted position */
+      top: 5%;
+      left: 5%;
     }
 
     .car-2 {
       animation-duration: 14s;
-      top: 15%; /* Adjusted position */
-      left: 85%; /* Adjusted position */
+      top: 15%;
+      left: 80%;
     }
 
     .car-3 {
       animation-duration: 16s;
-      top: 60%; /* Adjusted position */
-      left: 5%; /* Adjusted position */
+      top: 60%;
+      left: 5%;
     }
 
     .car-4 {
       animation-duration: 18s;
-      top: 80%; /* Adjusted position */
-      left: 90%; /* Adjusted position */
+      top: 80%;
+      left: 85%;
     }
 
     @keyframes float-car {
@@ -687,38 +652,58 @@
 
     /* Responsiveness */
     @media (max-width: 768px) {
-      .car {
-        width: 30px; /* Smaller cars on smaller screens */
+      .maintenance-card {
+        padding: 15px;
       }
 
-      .car-1 {
-        top: 5%;
-        left: 5%;
+      .logo {
+        width: 100px;
       }
 
-      .car-2 {
-        top: 15%;
-        left: 80%;
+      .logo-glow {
+        width: 120px;
+        height: 40px;
       }
 
-      .car-3 {
-        top: 60%;
-        left: 5%;
+      .title {
+        font-size: 1.5rem;
       }
 
-      .car-4 {
-        top: 80%;
-        left: 85%;
+      .message {
+        font-size: 0.9rem;
+      }
+
+      .countdown-value {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+      }
+
+      .countdown-label {
+        font-size: 0.6rem;
+      }
+
+      .date {
+        font-size: 0.9rem;
+      }
+
+      .contact-text {
+        font-size: 0.8rem;
+      }
+
+      .social-link {
+        width: 35px;
+        height: 35px;
+        font-size: 0.9rem;
+      }
+
+      .footer-text {
+        font-size: 0.7rem;
       }
     }
   </style>
 </head>
 <body>
-  <!-- Loading overlay -->
-  <div class="loading-overlay" id="loading-overlay">
-    <div class="loading-spinner"></div>
-  </div>
-
   <!-- Main content wrapped in a container -->
   <div class="main-content" id="main-content">
     <!-- Floating Music Notes -->
@@ -729,16 +714,16 @@
 
     <!-- Floating Cars -->
     <div class="car car-1">
-      <img src="car1.svg">
+      <img src="car1.svg" alt="Car 1">
     </div>
     <div class="car car-2">
-      <img src="car2.svg">
+      <img src="car2.svg" alt="Car 2">
     </div>
     <div class="car car-3">
-      <img src="car3.svg">
+      <img src="car3.svg" alt="Car 3">
     </div>
     <div class="car car-4">
-      <img src="car4.svg">
+      <img src="car4.svg" alt="Car 4">
     </div>
 
     <div class="shape shape-1"></div>
@@ -836,26 +821,6 @@
         }
       });
     }
-
-    // Wait for the entire page to load
-    window.addEventListener('load', function() {
-      const loadingOverlay = document.getElementById('loading-overlay');
-      const mainContent = document.getElementById('main-content');
-      
-      // Hide loading overlay and show main content
-      setTimeout(function() {
-        loadingOverlay.style.opacity = '0';
-        mainContent.style.opacity = '1';
-        
-        // Remove loading overlay after transition
-        setTimeout(function() {
-          loadingOverlay.style.display = 'none';
-        }, 500);
-      }, 1000);
-      
-      // Detect color scheme
-      detectColorScheme();
-    });
 
     // Update current time and date
     function updateDateTime() {
