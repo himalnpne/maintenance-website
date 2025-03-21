@@ -27,8 +27,22 @@
       --glass: rgba(255, 255, 255, 0.1); /* Glassmorphism effect */
       --shadow: 0 8px 32px rgba(0, 0, 0, 0.1); /* Soft shadow */
       --blur: blur(10px); /* Blur effect for glassmorphism */
+      --logo-primary: #014b92; /* Logo primary color */
+      --logo-secondary: #c8002a; /* Logo secondary color */
     }
     
+    /* Dark mode styles */
+    body.dark-mode {
+      --light: #1e293b; /* Dark background */
+      --dark: #f8fafc; /* Light text */
+      --primary: #4a90e2; /* Light blue for dark mode */
+      --secondary: #ff6b6b; /* Light red for dark mode */
+      --accent: #ff6b6b; /* Light red for dark mode */
+      --glass: rgba(30, 41, 59, 0.1); /* Dark glassmorphism */
+      --logo-primary: #4a90e2; /* Logo primary color in dark mode */
+      --logo-secondary: #ff6b6b; /* Logo secondary color in dark mode */
+    }
+
     * {
       margin: 0;
       padding: 0;
@@ -46,18 +60,6 @@
       position: relative;
       overflow: hidden;
       transition: background-color 0.3s, color 0.3s;
-    }
-
-    /* Dark mode styles */
-    body.dark-mode {
-      --light: #1e293b; /* Dark background */
-      --dark: #f8fafc; /* Light text */
-      --primary: #4a90e2; /* Light blue for dark mode */
-      --secondary: #ff6b6b; /* Light red for dark mode */
-      --accent: #ff6b6b; /* Light red for dark mode */
-      --glass: rgba(30, 41, 59, 0.1); /* Dark glassmorphism */
-      background-color: var(--light);
-      color: var(--dark);
     }
 
     /* Add a tiling effect to the background */
@@ -774,11 +776,10 @@
             <defs>
               <style>
                 .cls-1 {
-                  fill: var(--primary);
+                  fill: var(--logo-primary); /* Use CSS variable for primary color */
                 }
-
                 .cls-2 {
-                  fill: var(--secondary);
+                  fill: var(--logo-secondary); /* Use CSS variable for secondary color */
                 }
               </style>
             </defs>
